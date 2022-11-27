@@ -7,20 +7,17 @@ public class Star2442 {
 
         Scanner s = new Scanner(System.in);
         int num = s.nextInt();
-        int a=num;
+        int a = num;
 
         for (int i = 0; i < num; i++) {
-            for(int j=0; j<2*(i+1)-1; j++){
-                for(int k=a-1; k>0; k--){
-                    if(k==0){
-                        break;
-                    }
-                    System.out.println("a");
-                }
-                a--;
+            for (int k = (a-1); k > 0; k--) {
+                System.out.println(" ");
+            }
+            for (int j = 0; j < 2 * (i + 1) - 1; j++) {
                 System.out.println("*");
             }
-            System.out.println();
+            a--;
+            System.out.println("\n");
 
         }
 

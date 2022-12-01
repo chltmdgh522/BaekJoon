@@ -10,31 +10,31 @@ public class Star2445 {
         int a = num;
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < i + 1; j++) {
-                System.out.println("*");
+                System.out.print("*");
             }
             for (int k = 0; k < 2 * a - 2; k++) {
-                System.out.println(" ");
+                System.out.print(" ");
             }
             a--;
             for (int n = 0; n < i + 1; n++) {
-                System.out.println("*");
+                System.out.print("*");
             }
 
-            System.out.println("\n");
+            System.out.print("\n");
         }
         a = 2;
         for (int i = num - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                System.out.println("*");
+                System.out.print("*");
             }
             for (int k = 0; k < 2 * a - 2; k++) {
-                System.out.println(" ");
+                System.out.print(" ");
             }
             a++;
             for (int n = 0; n < i; n++) {
-                System.out.println("*");
+                System.out.print("*");
             }
-            System.out.println("\n");
+            System.out.print("\n");
         }
 
 

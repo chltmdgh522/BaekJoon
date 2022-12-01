@@ -2,35 +2,33 @@ package star;
 
 import java.util.Scanner;
 
-public class Star2444 {
+public class Star2446 {
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
+        Scanner s = new Scanner(System.in);
         int num = s.nextInt();
-
-        int c = 1;
         int a = num;
-
         for (int i = 0; i < num; i++) {
-            for (int k = (a - 1); k > 0; k--) {
+            for (int k = 0; k < i; k++) {
                 sb.append(" ");
             }
-            for (int j = 0; j < 2 * (i + 1) - 1; j++) {
+            for (int j = 2 * a - 1; j > 0; j--) {
                 sb.append("*");
             }
             a--;
             sb.append("\n");
         }
-        a = num - 2;
+        a = 2;
+        int b= num-1;
         for (int i = 0; i < num - 1; i++) {
-            for (int k = 0; k < c; k++) {
+            for (int k = 0; k < b - 1; k++) {
                 sb.append(" ");
             }
-            for (int j = 0; j < 2 * (a + 1) - 1; j++) {
+            for (int j = 0; j < 2 * a - 1; j++) {
                 sb.append("*");
             }
-            c++;
-            a--;
+            b--;
+            a++;
             sb.append("\n");
         }
         System.out.println(sb);

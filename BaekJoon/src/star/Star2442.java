@@ -11,13 +11,14 @@ public class Star2442 {
 
         for (int i = 0; i < num; i++) {
             for (int k = (a-1); k > 0; k--) {
-                System.out.println(" ");
+                System.out.print(" ");
             }
             for (int j = 0; j < 2 * (i + 1) - 1; j++) {
-                System.out.println("*");
+                System.out.print("*");
             }
             a--;
-            System.out.println("\n");
+            System.out.print("\n");
+
 
         }
 

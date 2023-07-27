@@ -35,6 +35,5 @@ public class Star10992 {
             }
         }
         System.out.print(sb);
-
     }
 }

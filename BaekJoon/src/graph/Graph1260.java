@@ -3,7 +3,7 @@ package graph;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.Stack;
+
 
 public class Graph1260 {
     static int n ;
@@ -24,7 +24,6 @@ public class Graph1260 {
 
             connectN[x][y]=connectN[y][x]=1;
         }
-
         dfs(start);
 
         checked=new boolean[n+1];
@@ -34,8 +33,9 @@ public class Graph1260 {
 
     public static void dfs(int i){
         checked[i]=true;
-        System.out.print(i+ " ");
+        System.out.println(i+ " ");
         for(int j=1; j<=n; j++){
+            System.out.println("start"+i);
             if(connectN[i][j]==1&&!checked[j]){
                 dfs(j);
             }
@@ -43,19 +43,20 @@ public class Graph1260 {
     }
     private static void bfs() {
         Queue<Integer> queue=new LinkedList<>();
-        queue.offer(start);
         checked[start]=true;
-        System.out.print(start+ " ");
+        queue.offer(start);
+        System.out.println(start+ " ");
         while(!queue.isEmpty()){
             int temp = queue.poll();
 
-            for(int j=1; j<=n; j++){
-                if(connectN[temp][j]==1&&!checked[j]){
-                    queue.offer(j);
-                    checked[j]=true;
-                    System.out.print(j+ " ");
+            for(int i=1; i<=n; i++){
+                if(connectN[temp][i]==1&&!checked[i]){
+                    checked[i]=true;
+                    queue.offer(i);
+                    System.out.println(i+ " ");
                 }
             }
+
         }
     }
 

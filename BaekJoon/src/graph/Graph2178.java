@@ -23,7 +23,7 @@ public class Graph2178 {
         for(int i=0;i<n;i++) {
             String input = sc.next();
             for(int j=0;j<m;j++) {
-                arr[i][j] = input.charAt(j) - '0';
+                arr[i][j] = input.charAt(j) - '0'; //int 형 쌉가능
             }
         }
 

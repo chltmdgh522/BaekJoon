@@ -23,7 +23,8 @@ public class Greedy16953 {
         Queue<Long> queue=new LinkedList<>();
         queue.offer(a);
         while(!queue.isEmpty()) {
-            for (int i = 0; i < queue.size(); i++) {
+            int size=queue.size();
+            for (int i = 0; i < size; i++) {
                 Long temp = queue.poll();
                 if (temp == b) {
                     return cnt+1;

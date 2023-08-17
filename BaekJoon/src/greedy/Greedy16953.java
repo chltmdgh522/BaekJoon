@@ -1,16 +1,21 @@
 package greedy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Greedy16953 {
     static long a;
     static long b;
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        a=sc.nextInt();
-        b=sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader bfr=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer stk=new StringTokenizer(bfr.readLine());
+        long a=Long.parseLong(stk.nextToken());
+        long b=Long.parseLong(stk.nextToken());
         System.out.println(bfs());
     }
     static int bfs(){
@@ -23,7 +28,6 @@ public class Greedy16953 {
                 if (temp == b) {
                     return cnt+1;
                 }
-
                 if (temp * 2 <=b) {
                     queue.offer(temp*2);
                 }

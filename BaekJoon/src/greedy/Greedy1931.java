@@ -24,7 +24,7 @@ public class Greedy1931 {
             end[i] = e;
             endSort[i] = end[i];
         }
-        Arrays.stream(endSort).sorted();
+        endSort = Arrays.stream(endSort).sorted().toArray();
 
         visited = new boolean[endSort[endSort.length - 1] + 1];
         check();
@@ -33,7 +33,7 @@ public class Greedy1931 {
     static void check() {
         int cnt = 0;
         int count = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // 10
             for (int j = start[i]; j <= end[i]; j++) {
                 if (visited[j]) {
                     break;

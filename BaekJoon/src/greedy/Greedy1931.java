@@ -1,53 +1,49 @@
 package greedy;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Greedy1931 {
+
     static int n;
-    static int[] start;
-    static int[] end;
-    static boolean[] visited;
+    static int[][] time;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         n = sc.nextInt();
-        start = new int[n];
-        end = new int[n];
-        int[] endSort = new int[n];
 
-        for (int i = 0; i < n; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
-            start[i] = s;
-            end[i] = e;
-            endSort[i] = end[i];
+        time=new int[n][2];
+        for(int i=0; i<n; i++){
+            time[i][0]=sc.nextInt();
+            time[i][1]=sc.nextInt();
         }
-        endSort = Arrays.stream(endSort).sorted().toArray();
 
-        visited = new boolean[endSort[endSort.length - 1] + 1];
+        Arrays.sort(time, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if(o1[1]==o2[1]){
+                    return o1[0]-o2[0];
+                }
+                return o1[1]-o2[1];
+            }
+        });
         check();
+
     }
 
     static void check() {
-        int cnt = 0;
-        int count = 0;
-        for (int i = 0; i < n; i++) { // 10
-            for (int j = start[i]; j <= end[i]; j++) {
-                if (visited[j]) {
-                    break;
-                } else {
-                    visited[j] = true;
-                    cnt++;
-                }
-            }
-            if (cnt == end[i] - start[i] + 1) {
-                count++;
-            }
-            cnt = 0;
+        int preTime=0;
+        int cnt=0;
 
+        for(int i=0; i<n; i++){
+            if(preTime<=time[i][0]){
+                preTime=time[i][1];
+                cnt++;
+            }
         }
-        System.out.println(count);
+        System.out.println(cnt);
+
+
     }
 }

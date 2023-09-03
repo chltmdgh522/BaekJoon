@@ -16,48 +16,45 @@ public class Graph2178 {
 
 
     public static void main(String[] args) throws IOException {
-        BufferedReader bfr=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer stk = new StringTokenizer(bfr.readLine());
-        n = Integer.parseInt(stk.nextToken());
-        m = Integer.parseInt(stk.nextToken());
+        Scanner sc= new Scanner(System.in);
+        n = sc.nextInt();
+        m= sc.nextInt();
 
-
-        arr = new int[n][m];
-        visited = new boolean[n][m];
+        arr=new int[n][m];
+        visited=new boolean[n][m];
 
         for(int i=0; i<n; i++){
-            String input=stk.nextToken();
+            String input = sc.next();
             for(int j=0; j<m; j++){
-                arr[i][j]=input.charAt(j)-'0';
+                arr[i][j] = input.charAt(j) - '0';
             }
         }
-
         visited[0][0]=true;
+
         bfs(0,0);
         System.out.println(arr[n-1][m-1]);
 
     }
 
     public static void bfs(int x, int y) {
-       Queue<int[]> queue=new LinkedList<>();
-       queue.add(new int[]{x,y});
+        Queue<int[]> queue=new LinkedList<>();
+        queue.add(new int[]{x,y});
 
-       while(!queue.isEmpty()){
-           int[] temp = queue.poll();
-           int nx=temp[0];
-           int ny=temp[1];
-
-           for(int i=0; i<4; i++){
-               int nextDx= nx+dx[i];
-               int nextDy=ny+dy[i];
-               if(nextDx>=0&&nextDy>=0&&nextDy<m&&nextDx<n){
-                   if(!visited[nextDx][nextDy]&&arr[nextDx][nextDy]==1){
-                       queue.add(new int[]{nextDx,nextDy});
-                       visited[nextDx][nextDy]=true;
-                       arr[nextDx][nextDy]=arr[nx][ny]+1;
-                   }
-               }
-           }
-       }
+        while(!queue.isEmpty()){
+            int[] temp = queue.poll();
+            int tempX = temp[0];
+            int tempY=temp[1];
+            for(int i=0; i<4; i++){
+                int nextDx=tempX+dx[i];
+                int nextDy=tempY+dy[i];
+                if(nextDx>=0&&nextDy>=0&&nextDx<n&&nextDy<m){
+                    if(!visited[nextDx][nextDy]&&arr[nextDx][nextDy]==1){
+                        queue.add(new int[]{nextDx,nextDy});
+                        visited[nextDx][nextDy]=true;
+                        arr[nextDx][nextDy]=arr[tempX][tempY]+1;
+                    }
+                }
+            }
+        }
     }
 }

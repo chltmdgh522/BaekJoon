@@ -8,12 +8,15 @@ public class Graph10026 {
     static int n;
 
     static char[][] arr;
+
+    static char[][] arr1;
     static boolean[][] visited;
 
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
     static int count = 0;
+    static int count1=0;
 
 
     public static void main(String[] args) {
@@ -23,6 +26,7 @@ public class Graph10026 {
         n = sc.nextInt();
 
         arr = new char[n][n];
+        arr1=new char[n][n];
         visited = new boolean[n][n];
 
         for (int i = 0; i < n; i++) {
@@ -32,39 +36,62 @@ public class Graph10026 {
             }
         }
 
+
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (!visited[i][j]) {
                     visited[i][j] = true;
                     switch (arr[i][j]) {
-                        case 'R':
-                            System.out.println("R");
+                        case 'R' -> {
                             identify = 'R';
                             bfs(i, j, identify);
                             count++;
-                            System.out.println("1");
-                            break;
-                        case 'B':
-                            System.out.println("B");
+                        }
+                        case 'B' -> {
                             identify = 'B';
                             bfs(i, j, identify);
                             count++;
-                            System.out.println("2");
-                            break;
-                        case 'G':
-                            System.out.println("G");
+                        }
+                        case 'G' -> {
                             identify = 'G';
                             bfs(i, j, identify);
                             count++;
-                            System.out.println("3");
-                            break;
+                        }
                     }
                 }
             }
         }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(arr[i][j]=='G'){
+                    arr[i][j] = 'R';
+                }
+            }
+        }
 
+        visited= new boolean[n][n];
 
-        System.out.println(count);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (!visited[i][j]) {
+                    visited[i][j] = true;
+                    switch (arr[i][j]) {
+                        case 'R' -> {
+                            identify = 'R';
+                            bfs(i, j, identify);
+                            count1++;
+                        }
+                        case 'B' -> {
+                            identify = 'B';
+                            bfs(i, j, identify);
+                            count1++;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(count+" "+count1);
 
 
     }
@@ -82,30 +109,19 @@ public class Graph10026 {
                 for (int k = 0; k < 4; k++) {
                     int staticNextX = staticX + dx[k];
                     int staticNextY = staticY + dy[k];
-                    if (id == arr[staticNextX][staticNextY]) {
-                        if (staticNextX >= 0 && staticNextX < n && staticNextY >= 0 && staticNextY < n) {
+                    if (staticNextX >= 0 && staticNextX < n && staticNextY >= 0 && staticNextY < n) {
+                        if (arr[staticNextX][staticNextY] == id) {
                             if (!visited[staticNextX][staticNextY]) {
+                                visited[staticNextX][staticNextY] = true;
                                 switch (arr[staticNextX][staticNextY]) {
-                                    case 'R':
-                                        queue.add(new int[]{staticNextX, staticNextY});
-
-                                        visited[staticNextX][staticNextY] = true;
-                                        System.out.println("a");
-                                        break;
-                                    case 'G':
-                                        queue.add(new int[]{staticNextX, staticNextY});
-                                        visited[staticNextX][staticNextY] = true;
-                                        System.out.println("b");
-                                        break;
-                                    case 'B':
-                                        queue.add(new int[]{staticNextX, staticNextY});
-                                        visited[staticNextX][staticNextY] = true;
-                                        System.out.println("c");
-                                        break;
+                                    case 'R' -> queue.add(new int[]{staticNextX, staticNextY});
+                                    case 'G' -> queue.add(new int[]{staticNextX, staticNextY});
+                                    case 'B' -> queue.add(new int[]{staticNextX, staticNextY});
                                 }
 
                             }
                         }
+
                     }
                 }
             }
@@ -113,9 +129,3 @@ public class Graph10026 {
 
     }
 }
-  /*
-  *
-  *   if (arr[staticNextX][staticNextY] == 'R' || arr[staticNextX][staticNextY] == 'B' || arr[staticNextX][staticNextY] == 'G') {
-                                queue.add(new int[]{staticNextX, staticNextY});
-                                visited[staticNextX][staticNextY] = true;
-                            }*/

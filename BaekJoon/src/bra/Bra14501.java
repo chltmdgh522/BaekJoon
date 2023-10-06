@@ -19,26 +19,22 @@ public class Bra14501 {
             arr[i][1] = Integer.parseInt(st.nextToken());
         }
 
-        System.out.println(solution());
+        System.out.println(getMaxProfit(0));
     }
 
-    public static int solution() {
-        return getMaxProfit(0);
-    }
 
     public static int getMaxProfit(int day) {
-        if (day >= n)
+        if(day>=n){
             return 0;
-
-        // 현재 상담을 선택하지 않는 경우
-        int profit1 = getMaxProfit(day + 1);
-
-        // 현재 상담을 선택하는 경우
-        int profit2 = 0;
-        if (day + arr[day][0] <= n) {
-            profit2 = arr[day][1] + getMaxProfit(day + arr[day][0]);
         }
 
-        return Math.max(profit1, profit2);
+        int p1=getMaxProfit(day+1);
+
+        int p2=0;
+        if(day+arr[day][0]<=n){
+            p2=arr[day][1] + getMaxProfit(day+arr[day][0]);
+        }
+
+        return Math.max(p1,p2);
     }
 }

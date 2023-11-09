@@ -12,22 +12,17 @@ public class Graph7576 {
     static boolean[][] visited;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
-    static int count = 0;
+    static int cnt1 = 0;
+    static Queue<int[]> queue = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        int minusCnt = 0;
-        int cnt1 = 0;
-
-        Map<Integer, Integer> hashMap = new HashMap<>();
-        st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         arr = new int[m][n];
         visited = new boolean[m][n];
-        int cnt = 0;
-
+        int count = 0;
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -38,70 +33,56 @@ public class Graph7576 {
                 }
             }
         }
+
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (!visited[i][j] && arr[i][j] == 1) {
+                if (arr[i][j] == 1) {
                     visited[i][j] = true;
-                    hashMap.put(i, j);
+                    queue.add(new int[]{i, j});
                 }
             }
         }
-        bfs(hashMap);
+
+        int result = bfs();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (arr[i][j] == 0) {
-                    cnt++;
-                }
-                if (arr[i][j] == -1) {
-                    minusCnt++;
+                    count++;
                 }
             }
         }
-        int total1 = 0;
-
-        total1 = n * m - minusCnt;
-        if (cnt != 0) {
+        if (count != 0) {
             System.out.println(-1);
-        } else if (total1 == cnt1) {
-            System.out.println(0);
         } else {
-            System.out.println(count - 1);
+            System.out.println(result);
         }
+
     }
 
-
-    static void bfs(Map<Integer, Integer> hashMap) {
-        Queue<int[]> queue = new LinkedList<>();
-
-        for (Integer key : hashMap.keySet()) {
-            queue.add(new int[]{key, hashMap.get(key)});
-        }
+    static int bfs() {
+        int cnt = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
-
-            for (int a = 0; a < size; a++) {
-                int[] poll = queue.poll();
-                int staticX = poll[0];
-                int staticY = poll[1];
-
-                for (int k = 0; k < 4; k++) {
-                    int nextStaticX = staticX + dx[k];
-                    int nextStaticY = staticY + dy[k];
-
-                    if (nextStaticX >= 0 && nextStaticX < m && nextStaticY >= 0 && nextStaticY < n) {
-                        if (!visited[nextStaticX][nextStaticY]) {
-                            visited[nextStaticX][nextStaticY] = true;
-                            if (arr[nextStaticX][nextStaticY] == 0) {
-                                arr[nextStaticX][nextStaticY] = 1;
-                                queue.add(new int[]{nextStaticX, nextStaticY});
-                            } else if (arr[nextStaticX][nextStaticY] == 1) {
-                                queue.add(new int[]{nextStaticX, nextStaticY});
-                            }
+            for (int k = 0; k < size; k++) {
+                int[] temp = queue.poll();
+                int staticX = temp[0];
+                int staticY = temp[1];
+                for (int i = 0; i < 4; i++) {
+                    int nextX = staticX + dx[i];
+                    int nextY = staticY + dy[i];
+                    if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n) {
+                        if (arr[nextX][nextY] == 0 && !visited[nextX][nextY]) {
+                            visited[nextX][nextY] = true;
+                            arr[nextX][nextY] = 1;
+                            queue.add(new int[]{nextX, nextY});
                         }
                     }
                 }
+
             }
-            count++;
+            cnt++;
         }
+
+        return cnt - 1;
     }
 }

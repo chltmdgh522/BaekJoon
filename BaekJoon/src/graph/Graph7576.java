@@ -22,7 +22,6 @@ public class Graph7576 {
         m = Integer.parseInt(st.nextToken());
         arr = new int[m][n];
         visited = new boolean[m][n];
-        int count = 0;
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -30,33 +29,22 @@ public class Graph7576 {
                 arr[i][j] = Integer.parseInt(st.nextToken());
                 if (arr[i][j] == 1) {
                     cnt1++;
-                }
-            }
-        }
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (arr[i][j] == 1) {
-                    visited[i][j] = true;
                     queue.add(new int[]{i, j});
                 }
             }
         }
-
         int result = bfs();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (arr[i][j] == 0) {
-                    count++;
+                    System.out.println(-1);
+                    return;
                 }
             }
+            if (i == m - 1) {
+                System.out.println(result);
+            }
         }
-        if (count != 0) {
-            System.out.println(-1);
-        } else {
-            System.out.println(result);
-        }
-
     }
 
     static int bfs() {
@@ -78,11 +66,9 @@ public class Graph7576 {
                         }
                     }
                 }
-
             }
             cnt++;
         }
-
         return cnt - 1;
     }
 }

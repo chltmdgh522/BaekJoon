@@ -1,5 +1,6 @@
 public class Test {
-    public static void main(String[] args) {
-     
-    }
+    public static final Test s = null;
+    
+    public final String a="d";
+    
 }

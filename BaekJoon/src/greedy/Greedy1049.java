@@ -7,7 +7,6 @@ import java.util.*;
 
 public class Greedy1049 {
     static int n;
-
     static int[] sett;
     static int[] one;
 
@@ -28,32 +27,26 @@ public class Greedy1049 {
         System.out.println(solution(m));
     }
 
-
     public static int solution(int m) {
-        List<Integer> copy_one = new ArrayList<>();
+        int[] copy_one = new int[m];
         for (int i = 0; i < one.length; i++) {
-            copy_one.add(one[i]);
+            copy_one[i] = one[i];
             one[i] *= 6;
             sett[i + m] = one[i];
         }
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < sett.length; i++) {
-            list.add(sett[i]);
-        }
-        Collections.sort(list);
-        Collections.sort(copy_one);
+        Arrays.sort(copy_one);
+        Arrays.sort(sett);
 
         if (n < 7) {
-            int min= Math.min(list.get(0),copy_one.get(0)*n);
-            return min;
+            return Math.min(sett[0], copy_one[0] * n);
         }
 
         int mok = n / 6;
         int reminder = n % 6;
 
-        int result1 = list.get(0) * (mok + 1);
-        int result2 = list.get(0) * mok + copy_one.get(0) * reminder;
-        return Math.min(result1, result2);
+        int result1 = sett[0] * (mok + 1);
+        int result2 = sett[0] * mok + copy_one[0] * reminder;
 
+        return Math.min(result1, result2);
     }
 }

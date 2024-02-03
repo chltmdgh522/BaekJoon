@@ -10,6 +10,7 @@ public class Back15649 {
     static int m;
 
     static boolean[] visit;
+    static int[] num;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,24 +18,24 @@ public class Back15649 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         visit = new boolean[n];
+        num = new int[m];
         dfs(0);
     }
 
     public static int dfs(int cnt) {
-        int[] num = new int[m];
-
         if (cnt == m) {
             for (int j : num) {
                 System.out.print(j + " ");
             }
             System.out.println();
+            cnt = 0;
             return 0;
         }
-        for (int i = 0; i < n ; i++) {
+        for (int i = 0; i < n; i++) {
             if (!visit[i]) {
                 visit[i] = true;
-                num[m] = i+1;
-                dfs(i+1);
+                num[cnt] = i + 1;
+                dfs(cnt + 1);
                 visit[i] = false;
             }
         }

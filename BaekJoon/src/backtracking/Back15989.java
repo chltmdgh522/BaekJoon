@@ -11,17 +11,16 @@ public class Back15989 {
     static int[][] street;
 
     static boolean[][] chickenVisit;
-
-    static int min;
-
     static int result;
 
     static int resultMin = Integer.MAX_VALUE;
     static int cnt;
     static List<int[]> chicken;
+    static List<int[]> home = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
         st = new StringTokenizer(br.readLine());
 
@@ -30,6 +29,7 @@ public class Back15989 {
 
         street = new int[n][n];
         chickenVisit = new boolean[n][n];
+        chicken = new ArrayList<>();
         cnt = 0;
 
         for (int i = 0; i < n; i++) {
@@ -39,10 +39,12 @@ public class Back15989 {
                 if (street[i][j] == 2) {
                     cnt++;
                 }
+                if (street[i][j] == 1) {
+                    home.add(new int[]{i, j});
+                }
             }
         }
-        chicken=new ArrayList<>();
-        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+
         backTracking(0);
         bw.write(String.valueOf(resultMin));
         bw.flush();
@@ -53,7 +55,7 @@ public class Back15989 {
         if (depth == m) {
             result = 0;
             resultMin = Math.min(resultMin, calculation());
-            chicken=new ArrayList<>();
+            chicken = new ArrayList<>();
             return 0;
         }
 
@@ -61,10 +63,8 @@ public class Back15989 {
             for (int j = 0; j < n; j++) {
                 if (street[i][j] == 2 && !chickenVisit[i][j]) {
                     chickenVisit[i][j] = true;
-                    street[i][j] = 3;
-                    chicken.add(new int[]{i+1,j+1});
+                    chicken.add(new int[]{i, j});
                     backTracking(depth + 1);
-                    street[i][j] = 2;
                     if (cnt != m) {
                         chickenVisit[i][j] = false;
                     }
@@ -75,19 +75,15 @@ public class Back15989 {
     }
 
     public static int calculation() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (street[i][j] == 1) {
-                    min = Integer.MAX_VALUE;
-                    for(int[] chicken1 : chicken) {
-                        int absX = Math.abs(chicken1[0] - (i + 1));
-                        int absY = Math.abs(chicken1[1] - (j + 1));
-                        int sum = absX + absY;
-                        min = Math.min(min, sum);
-                    }
-                    result += min;
-                }
+        for (int[] home1 : home) {
+            int min = Integer.MAX_VALUE;
+            for (int[] chicken1 : chicken) {
+                int absX = Math.abs(chicken1[0] - home1[0]);
+                int absY = Math.abs(chicken1[1] - home1[1]);
+                int sum = absX + absY;
+                min = Math.min(min, sum);
             }
+            result += min;
         }
         return result;
     }

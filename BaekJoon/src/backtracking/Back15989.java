@@ -18,6 +18,8 @@ public class Back15989 {
     static List<int[]> chicken;
     static List<int[]> home = new ArrayList<>();
 
+    static int x, y;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -44,7 +46,6 @@ public class Back15989 {
                 }
             }
         }
-
         backTracking(0);
         bw.write(String.valueOf(resultMin));
         bw.flush();
@@ -55,16 +56,25 @@ public class Back15989 {
         if (depth == m) {
             result = 0;
             resultMin = Math.min(resultMin, calculation());
-            chicken = new ArrayList<>();
             return 0;
         }
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (street[i][j] == 2 && !chickenVisit[i][j]) {
-                    chickenVisit[i][j] = true;
-                    chicken.add(new int[]{i, j});
-                    backTracking(depth + 1);
+                    if (!chicken.isEmpty()) {
+                        int[] pair = chicken.get(chicken.size() - 1);
+                        x = pair[0];
+                        y = pair[1];
+                    }
+                    if (chicken.isEmpty() || x <= i) {
+                        if (y <= j || x!=i) {
+                            chickenVisit[i][j] = true;
+                            chicken.add(new int[]{i, j});
+                            backTracking(depth + 1);
+                            chicken.remove(chicken.size() - 1);
+                        }
+                    }
                     if (cnt != m) {
                         chickenVisit[i][j] = false;
                     }

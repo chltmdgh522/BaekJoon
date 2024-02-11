@@ -63,7 +63,7 @@ public class Back15989 {
             for (int j = 0; j < n; j++) {
                 if (street[i][j] == 2 && !chickenVisit[i][j]) {
                     if (!chicken.isEmpty()) {
-                        int[] pair = chicken.get(chicken.size() - 1);
+                        int[] pair = chicken.getLast();
                         x = pair[0];
                         y = pair[1];
                     }
@@ -72,7 +72,7 @@ public class Back15989 {
                             chickenVisit[i][j] = true;
                             chicken.add(new int[]{i, j});
                             backTracking(depth + 1);
-                            chicken.remove(chicken.size() - 1);
+                            chicken.removeLast();
                         }
                     }
                     if (cnt != m) {

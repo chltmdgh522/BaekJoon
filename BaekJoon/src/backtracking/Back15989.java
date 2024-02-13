@@ -14,7 +14,6 @@ public class Back15989 {
     static int result;
 
     static int resultMin = Integer.MAX_VALUE;
-    static int cnt;
     static List<int[]> chicken;
     static List<int[]> home = new ArrayList<>();
 
@@ -32,15 +31,11 @@ public class Back15989 {
         street = new int[n][n];
         chickenVisit = new boolean[n][n];
         chicken = new ArrayList<>();
-        cnt = 0;
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++) {
                 street[i][j] = Integer.parseInt(st.nextToken());
-                if (street[i][j] == 2) {
-                    cnt++;
-                }
                 if (street[i][j] == 1) {
                     home.add(new int[]{i, j});
                 }
@@ -73,10 +68,8 @@ public class Back15989 {
                             chicken.add(new int[]{i, j});
                             backTracking(depth + 1);
                             chicken.removeLast();
+                            chickenVisit[i][j] = false;
                         }
-                    }
-                    if (cnt != m) {
-                        chickenVisit[i][j] = false;
                     }
                 }
             }

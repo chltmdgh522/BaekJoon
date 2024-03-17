@@ -17,13 +17,16 @@ public class Implement14503 {
 
     static int y;
 
-    static int direction;
 
-    static int dx = 0;
+    static int[] dx = {-1, 0, 1, 0};
 
-    static int dy = 0;
+    static int[] dy = {0, 1, 0, -1};
 
     static int[][] arr;
+
+    static int cnt = 0;
+
+    static int num = 2;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,9 +35,10 @@ public class Implement14503 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
+        st = new StringTokenizer(br.readLine());
         x = Integer.parseInt(st.nextToken());
         y = Integer.parseInt(st.nextToken());
-        direction = Integer.parseInt(st.nextToken());
+        int direction = Integer.parseInt(st.nextToken());
 
         arr = new int[n][m];
 
@@ -45,58 +49,46 @@ public class Implement14503 {
             }
         }
 
-        dfs(0, x, y);
-
+        dfs(direction, x, y);
+        System.out.println(cnt);
 
     }
 
-    private static void dfs(int depth, int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
+    private static void dfs(int direction, int x, int y) {
+        if (arr[x][y] == 0) {
+            arr[x][y] = num;
+            num++;
+            cnt++;
 
-        while (!queue.isEmpty()) {
-            int[] poll = queue.poll();
-            int sX = poll[0];
-            int sY = poll[1];
+        }
+        boolean flag=false;
+        int original=direction;
+        for (int i = 0; i < 4; i++) {
+            direction = (direction + 3) % 4;
+            int nX = x + dx[direction];
+            int nY = y + dy[direction];
 
-            direct();
-            int nX = sX + dx;
-            int nY = sY + dy;
-
-            if (arr[nX][nY] != 1) {
-                queue.add(new int[]{nX, nY});
-
-            } else {
-                if (direction == 0) {
-                    direction += 3;
-                } else {
-                    direction -= 1;
+            if (nX >= 0 && nX < n && nY >= 0 && nY < m) {
+                if(arr[nX][nY]==0) {
+                    dfs(direction, nX, nY);
+                    flag=true;
+                    break;
                 }
-                direct();
-                nX = sX + dx;
-                nY = sX + dy;
             }
         }
+       if(!flag){
+           int nd=(original+2)%4;
+           int nX=x+dx[nd];
+           int nY=y+dy[nd];
+
+           if(nX >= 0 && nX < n && nY >= 0 && nY < m){
+               if(arr[nX][nY]!=1){
+                   dfs(original,nX,nY);
+               }
+           }
+       }
+
+
     }
 
-    private static void direct() {
-        switch (direction) {
-            case 0:
-                dx = -1;
-                dy = 0;
-                break;
-            case 1:
-                dx = 0;
-                dy = 1;
-                break;
-            case 2:
-                dx = 1;
-                dy = 0;
-                break;
-            case 3:
-                dx = 0;
-                dy = -1;
-                break;
-        }
-    }
 }

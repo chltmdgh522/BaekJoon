@@ -53,7 +53,6 @@ public class Implement14503 {
         System.out.println(cnt);
 
     }
-
     private static void dfs(int direction, int x, int y) {
         if (arr[x][y] == 0) {
             arr[x][y] = num;

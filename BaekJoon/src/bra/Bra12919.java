@@ -6,6 +6,47 @@ import java.io.InputStreamReader;
 
 public class Bra12919 {
     static String s;
+    static boolean flag;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        s = br.readLine();
+        String t = br.readLine();
+
+        dfs(t);
+        if (flag) {
+            System.out.println(1);
+        } else {
+            System.out.println(0);
+        }
+    }
+
+    private static void dfs(String message) {
+        if (message.length() == s.length()) {
+            if (message.equals(s)) {
+                flag = true;
+            }
+            return;
+        }
+
+        if (message.endsWith("A")) {
+            dfs(message.substring(0, message.length() - 1));
+        }
+        if (message.startsWith("B")) {
+            dfs(new StringBuilder(message.substring(1)).reverse().toString());
+        }
+
+    }
+}
+
+/*
+* package bra;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Bra12919 {
+    static String s;
 
     static String t;
 
@@ -24,6 +65,8 @@ public class Bra12919 {
 
         sb = new StringBuilder();
         sb.append(s);
+
+
         len = t.length() - s.length();
 
         dfs(0);
@@ -52,12 +95,8 @@ public class Bra12919 {
             }
 
             if (!flag) {
-                StringBuilder b = sb.append('B');
-                String bb = b.toString();
-                sb = new StringBuilder();
-                for (int j = b.length() - 1; j >= 0; j--) {
-                    sb.append(bb.charAt(j));
-                }
+                sb.append('B');
+                sb.reverse();
                 dfs(level + 1);
                 String substring_b = sb.substring(1, sb.length());
                 sb = new StringBuilder();
@@ -67,3 +106,4 @@ public class Bra12919 {
         return 0;
     }
 }
+*/

@@ -1,3 +1,4 @@
+import javax.swing.plaf.nimbus.State;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,27 +9,27 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         Stack<int[]> stack = new Stack<>();
-        StringBuilder sb=new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        for(int i=1; i<=n; i++){
-            int height=Integer.parseInt(st.nextToken());
 
-            while(!stack.isEmpty()){
-                if(stack.peek()[1] > height){
-                    sb.append(stack.peek()[0]+" ");
+        for (int i = 0; i < n; i++) {
+            int top = Integer.parseInt(st.nextToken());
+            boolean flag = false;
+            while (!stack.isEmpty()) {
+                if (stack.peek()[0] > top) {
+                    sb.append(stack.peek()[1]);
+                    sb.append(" ");
+                    stack.push(new int[]{top,i+1});
+                    flag=true;
                     break;
                 }
                 stack.pop();
-
             }
-
-            if(stack.isEmpty()){
+            if(!flag){
                 sb.append("0 ");
+                stack.push(new int[]{top,i+1});
             }
-
-            stack.push(new int[]{i, height});
         }
 
         System.out.println(sb.toString().trim());

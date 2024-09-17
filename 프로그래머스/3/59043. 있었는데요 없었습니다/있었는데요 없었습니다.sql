@@ -1,0 +1,7 @@
+-- 코드를 입력하세요
+SELECT a.ANIMAL_ID, a.NAME
+FROM ANIMAL_INS a 
+WHERE  a.DATETIME > (SELECT b.DATETIME 
+                     FROM ANIMAL_OUTS b
+                    WHERE b.ANIMAL_ID = a.ANIMAL_ID)
+ORDER BY a.DATETIME ASC

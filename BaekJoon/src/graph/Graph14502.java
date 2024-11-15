@@ -3,10 +3,7 @@ package graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Graph14502 {
     static int n;
@@ -62,15 +59,15 @@ public class Graph14502 {
                 if (arr[i][j] == 2) {
                     queue.add(new int[]{i, j});
                 }
-            }
-        }
+            } //Collections.sort(list, Collections.reverseOrder());//Integer.parseInt()
+            // String.valueOf()
+        }//static int min = Integer.MAX_VALUE;
         int[][] copyArr = new int[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 copyArr[i][j] = arr[i][j];
             }
         }
-
         while (!queue.isEmpty()) {
             int[] temp = queue.poll();
             int staticX = temp[0];

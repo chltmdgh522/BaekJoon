@@ -3,9 +3,7 @@ package graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Graph14940 {
 
@@ -61,7 +59,6 @@ public class Graph14940 {
     }
 
     private static void bfs() {
-
         while (!queue.isEmpty()) {
             int size = queue.size();
 

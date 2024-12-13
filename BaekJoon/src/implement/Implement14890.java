@@ -10,30 +10,52 @@ public class Implement14890 {
 
     static int l;
 
-    static int temp;
+    static int[][] map;
 
-    static int [][]arr;
     public static void main(String[] args) throws IOException {
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        st=new StringTokenizer(br.readLine());
+        st = new StringTokenizer(br.readLine());
 
-        n=Integer.parseInt(st.nextToken());
-        l=Integer.parseInt(st.nextToken());
+        n = Integer.parseInt(st.nextToken());
+        l = Integer.parseInt(st.nextToken());
 
-        arr=new int[n][n];
+        map = new int[n][n];
 
-        for (int i=0; i<n; i++){
-            st=new StringTokenizer(br.readLine());
-            for(int j=0; j<n; j++){
-                arr[i][j]=Integer.parseInt(st.nextToken());
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < n; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        imp();
+        System.out.println(solution());
     }
 
-    private static void imp(){
+    private static int solution() {
 
+        int pre1=0;
+        int cnt1=0;
+        int answer=0;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(j==0) {
+                    pre1 = map[i][j];
+                }
+                if(Math.abs(pre1 -map[i][j] )==1 ){
+                    cnt1++;
+                    answer++;
+                }
+
+                else{
+                    break;
+                }
+
+            }
+            cnt1=0;
+
+        }
+
+        return answer;
     }
 }

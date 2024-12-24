@@ -53,8 +53,6 @@ public class Implement2607 {
                     }
                 }
             }
-
-
         }
 
         System.out.println(answer);
